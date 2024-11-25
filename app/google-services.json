@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "79931235015",
+    "firebase_url": "https://electronicsstoreduan-default-rtdb.firebaseio.com",
+    "project_id": "electronicsstoreduan",
+    "storage_bucket": "electronicsstoreduan.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79931235015:android:819daf35d2176d9c3d3ce2",
+        "android_client_info": {
+          "package_name": "com.pro.electronic"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgrROJUO6CiouRVuQGE4-mDBoIeWUpE50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
