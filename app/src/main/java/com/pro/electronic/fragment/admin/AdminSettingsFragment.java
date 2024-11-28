@@ -15,8 +15,11 @@ import com.pro.electronic.R;
 import com.pro.electronic.activity.LoginActivity;
 import com.pro.electronic.activity.admin.AdminFeedbackActivity;
 import com.pro.electronic.activity.admin.AdminRevenueActivity;
+
 import com.pro.electronic.activity.admin.AdminTopProductActivity;
+
 import com.pro.electronic.prefs.DataStoreManager;
+import com.pro.electronic.utils.Constant;
 import com.pro.electronic.utils.GlobalFunction;
 
 public class AdminSettingsFragment extends Fragment {
@@ -40,9 +43,11 @@ public class AdminSettingsFragment extends Fragment {
 
         mView.findViewById(R.id.tv_manage_revenue).setOnClickListener(view -> onClickManageRevenue());
         mView.findViewById(R.id.tv_manage_top_product).setOnClickListener(view -> onClickManageTopProduct());
+
         mView.findViewById(R.id.tv_manage_feedback).setOnClickListener(view -> onClickManageFeedback());
         mView.findViewById(R.id.tv_sign_out).setOnClickListener(view -> onClickSignOut());
     }
+
 
 
     private void onClickManageRevenue() {
@@ -52,6 +57,7 @@ public class AdminSettingsFragment extends Fragment {
     private void onClickManageTopProduct() {
         GlobalFunction.startActivity(getActivity(), AdminTopProductActivity.class);
     }
+
 
 
     private void onClickManageFeedback() {
