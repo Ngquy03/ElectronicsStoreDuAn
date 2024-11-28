@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.pro.electronic.R;
 import com.pro.electronic.activity.ChangePasswordActivity;
-import com.pro.electronic.activity.FeedbackActivity;
 import com.pro.electronic.activity.LoginActivity;
 import com.pro.electronic.activity.MainActivity;
 import com.pro.electronic.prefs.DataStoreManager;
@@ -24,7 +23,6 @@ import com.pro.electronic.utils.GlobalFunction;
 public class AccountFragment extends Fragment {
 
     private View mView;
-    private LinearLayout layoutFeedback;
     private LinearLayout layoutChangePassword;
     private LinearLayout layoutSignOut;
 
@@ -58,14 +56,12 @@ public class AccountFragment extends Fragment {
     private void initUi() {
         TextView tvUsername = mView.findViewById(R.id.tv_username);
         tvUsername.setText(DataStoreManager.getUser().getEmail());
-        layoutFeedback = mView.findViewById(R.id.layout_feedback);
+
         layoutChangePassword = mView.findViewById(R.id.layout_change_password);
         layoutSignOut = mView.findViewById(R.id.layout_sign_out);
     }
 
     private void initListener() {
-        layoutFeedback.setOnClickListener(view ->
-                GlobalFunction.startActivity(getActivity(), FeedbackActivity.class));
         layoutChangePassword.setOnClickListener(view ->
                 GlobalFunction.startActivity(getActivity(), ChangePasswordActivity.class));
         layoutSignOut.setOnClickListener(view -> onClickSignOut());

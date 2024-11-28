@@ -157,32 +157,6 @@
                         android:textSize="@dimen/text_size_small" />
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/define_dimen_10">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="@dimen/define_dimen_10"
-                        android:layout_toStartOf="@+id/tv_voucher"
-                        android:text="@string/title_voucher"
-                        android:textColor="@color/textColorHeading"
-                        android:textSize="@dimen/text_size_small"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv_voucher"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"
-                        android:text="@string/app_name"
-                        android:textColor="@color/textColorSecondary"
-                        android:textSize="@dimen/text_size_small" />
-                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"

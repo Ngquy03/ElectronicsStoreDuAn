@@ -166,14 +166,6 @@ public class ProductDetailActivity extends BaseActivity {
             calculatorTotalPrice();
         });
 
-        layoutRatingAndReview.setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            RatingReview ratingReview = new RatingReview(RatingReview.TYPE_RATING_REVIEW_PRODUCT,
-                    String.valueOf(mProduct.getId()));
-            bundle.putSerializable(Constant.RATING_REVIEW_OBJECT, ratingReview);
-            GlobalFunction.startActivity(ProductDetailActivity.this,
-                    RatingReviewActivity.class, bundle);
-        });
 
         tvAddOrder.setOnClickListener(view -> {
             if (!isProductInCart()) {

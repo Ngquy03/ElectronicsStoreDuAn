@@ -69,7 +69,6 @@ public class AdminAddProductActivity extends BaseActivity {
         edtDescription = findViewById(R.id.edt_description);
         edtInfo = findViewById(R.id.edt_info);
         edtPrice = findViewById(R.id.edt_price);
-        edtPromotion = findViewById(R.id.edt_promotion);
         edtImage = findViewById(R.id.edt_image);
         edtImageBanner = findViewById(R.id.edt_image_banner);
         chbFeatured = findViewById(R.id.chb_featured);

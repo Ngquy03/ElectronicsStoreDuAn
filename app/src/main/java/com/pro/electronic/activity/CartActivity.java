@@ -43,13 +43,9 @@ public class CartActivity extends BaseActivity {
 
     private RelativeLayout layoutAddress;
     private TextView tvAddress;
-    private RelativeLayout layoutVoucher;
-    private TextView tvVoucher;
-    private TextView tvNameVoucher;
     private TextView tvPriceProduct;
     private TextView tvCountItem;
     private TextView tvAmount;
-    private TextView tvPriceVoucher;
     private TextView tvCheckout;
 
     private List<Product> listProductCart;
@@ -91,13 +87,9 @@ public class CartActivity extends BaseActivity {
         tvPaymentMethod = findViewById(R.id.tv_payment_method);
         layoutAddress = findViewById(R.id.layout_address);
         tvAddress = findViewById(R.id.tv_address);
-        layoutVoucher = findViewById(R.id.layout_voucher);
-        tvVoucher = findViewById(R.id.tv_voucher);
-        tvNameVoucher = findViewById(R.id.tv_name_voucher);
         tvCountItem = findViewById(R.id.tv_count_item);
         tvPriceProduct = findViewById(R.id.tv_price_product);
         tvAmount = findViewById(R.id.tv_amount);
-        tvPriceVoucher = findViewById(R.id.tv_price_voucher);
         tvCheckout = findViewById(R.id.tv_checkout);
     }
 
@@ -119,14 +111,7 @@ public class CartActivity extends BaseActivity {
             GlobalFunction.startActivity(CartActivity.this, AddressActivity.class, bundle);
         });
 
-        layoutVoucher.setOnClickListener(view -> {
-            Bundle bundle = new Bundle();
-            bundle.putInt(Constant.AMOUNT_VALUE, priceProduct);
-            if (voucherSelected != null) {
-                bundle.putLong(Constant.VOUCHER_ID, voucherSelected.getId());
-            }
-            GlobalFunction.startActivity(CartActivity.this, VoucherActivity.class, bundle);
-        });
+
 
         tvCheckout.setOnClickListener(view -> {
             if (listProductCart == null || listProductCart.isEmpty()) return;
@@ -233,7 +218,6 @@ public class CartActivity extends BaseActivity {
         if (voucherSelected != null) {
             String strPriceVoucher = "-" + voucherSelected.getPriceDiscount(priceProduct)
                     + Constant.CURRENCY;
-            tvPriceVoucher.setText(strPriceVoucher);
 
             mAmount = mAmount - voucherSelected.getPriceDiscount(priceProduct);
         }
@@ -261,23 +245,6 @@ public class CartActivity extends BaseActivity {
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onVoucherSelectedEvent(VoucherSelectedEvent event) {
-        if (event.getVoucher() != null) {
-            voucherSelected = event.getVoucher();
-            tvVoucher.setText(voucherSelected.getTitle());
-            tvNameVoucher.setText(voucherSelected.getTitle());
-            String strPriceVoucher = "-" + voucherSelected.getPriceDiscount(priceProduct)
-                    + Constant.CURRENCY;
-            tvPriceVoucher.setText(strPriceVoucher);
-        } else {
-            tvVoucher.setText(getString(R.string.label_no_voucher));
-            tvNameVoucher.setText(getString(R.string.label_no_voucher));
-            String strPriceVoucher = "-0" + Constant.CURRENCY;
-            tvPriceVoucher.setText(strPriceVoucher);
-        }
-        calculateTotalPrice();
-    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onOrderSuccessEvent(OrderSuccessEvent event) {

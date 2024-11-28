@@ -15,11 +15,8 @@ import com.pro.electronic.R;
 import com.pro.electronic.activity.LoginActivity;
 import com.pro.electronic.activity.admin.AdminFeedbackActivity;
 import com.pro.electronic.activity.admin.AdminRevenueActivity;
-import com.pro.electronic.activity.admin.AdminRoleActivity;
 import com.pro.electronic.activity.admin.AdminTopProductActivity;
-import com.pro.electronic.activity.admin.AdminVoucherActivity;
 import com.pro.electronic.prefs.DataStoreManager;
-import com.pro.electronic.utils.Constant;
 import com.pro.electronic.utils.GlobalFunction;
 
 public class AdminSettingsFragment extends Fragment {
@@ -39,24 +36,14 @@ public class AdminSettingsFragment extends Fragment {
     private void setupScreen() {
         TextView tvEmail = mView.findViewById(R.id.tv_email);
         tvEmail.setText(DataStoreManager.getUser().getEmail());
-        TextView tvManageRole = mView.findViewById(R.id.tv_manage_role);
-        if (Constant.MAIN_ADMIN.equals(DataStoreManager.getUser().getEmail())) {
-            tvManageRole.setVisibility(View.VISIBLE);
-        } else {
-            tvManageRole.setVisibility(View.GONE);
-        }
 
-        tvManageRole.setOnClickListener(view -> onClickManageRole());
+
         mView.findViewById(R.id.tv_manage_revenue).setOnClickListener(view -> onClickManageRevenue());
         mView.findViewById(R.id.tv_manage_top_product).setOnClickListener(view -> onClickManageTopProduct());
-        mView.findViewById(R.id.tv_manage_voucher).setOnClickListener(view -> onClickManageVoucher());
         mView.findViewById(R.id.tv_manage_feedback).setOnClickListener(view -> onClickManageFeedback());
         mView.findViewById(R.id.tv_sign_out).setOnClickListener(view -> onClickSignOut());
     }
 
-    private void onClickManageRole() {
-        GlobalFunction.startActivity(getActivity(), AdminRoleActivity.class);
-    }
 
     private void onClickManageRevenue() {
         GlobalFunction.startActivity(getActivity(), AdminRevenueActivity.class);
@@ -66,9 +53,6 @@ public class AdminSettingsFragment extends Fragment {
         GlobalFunction.startActivity(getActivity(), AdminTopProductActivity.class);
     }
 
-    private void onClickManageVoucher() {
-        GlobalFunction.startActivity(getActivity(), AdminVoucherActivity.class);
-    }
 
     private void onClickManageFeedback() {
         GlobalFunction.startActivity(getActivity(), AdminFeedbackActivity.class);

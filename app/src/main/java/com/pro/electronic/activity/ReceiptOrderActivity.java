@@ -64,7 +64,6 @@ public class ReceiptOrderActivity extends BaseActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rcvProducts.setLayoutManager(linearLayoutManager);
         tvPrice = findViewById(R.id.tv_price);
-        tvVoucher = findViewById(R.id.tv_voucher);
         tvTotal = findViewById(R.id.tv_total);
         tvPaymentMethod = findViewById(R.id.tv_payment_method);
         tvTrackingOrder = findViewById(R.id.tv_tracking_order);
@@ -111,8 +110,6 @@ public class ReceiptOrderActivity extends BaseActivity {
         tvDateTime.setText(DateTimeUtils.convertTimeStampToDate(Long.parseLong(mOrder.getDateTime())));
         String strPrice = mOrder.getPrice() + Constant.CURRENCY;
         tvPrice.setText(strPrice);
-        String strVoucher = "-" + mOrder.getVoucher() + Constant.CURRENCY;
-        tvVoucher.setText(strVoucher);
         String strTotal = mOrder.getTotal() + Constant.CURRENCY;
         tvTotal.setText(strTotal);
         tvPaymentMethod.setText(mOrder.getPaymentMethod());

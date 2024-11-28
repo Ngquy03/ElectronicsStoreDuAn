@@ -178,41 +178,9 @@
                         android:textColor="@color/textColorHeading"
                         android:textSize="@dimen/text_size_xsmall" />
 
-                    <TextView
-                        android:id="@+id/view_point"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/define_dimen_5"
-                        android:layout_marginEnd="@dimen/define_dimen_5"
-                        android:layout_toEndOf="@+id/tv_count_review"
-                        android:text="-"
-                        android:textColor="@color/textColorHeading"
-                        android:textSize="@dimen/text_size_xxnormal"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_centerVertical="true"
-                        android:layout_toEndOf="@+id/view_point"
-                        android:layout_marginEnd="@dimen/define_dimen_10"
-                        android:layout_toStartOf="@+id/img_next"
-                        android:text="@string/ratings_and_reviews"
-                        android:textColor="@color/textColorHeading"
-                        android:textSize="@dimen/text_size_xsmall" />
-
-                    <ImageView
-                        android:id="@+id/img_next"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_next_right"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"/>
                 </RelativeLayout>
 
             </LinearLayout>
-            <!--End layout infor-->
 
             <LinearLayout
                 android:layout_width="match_parent"
