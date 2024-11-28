@@ -59,9 +59,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterView
                 holder.imgFilter.setImageResource(R.drawable.ic_price);
                 break;
 
-            case Filter.TYPE_FILTER_PROMOTION:
-                holder.imgFilter.setImageResource(R.drawable.ic_promotion);
-                break;
+
         }
         holder.tvTitle.setText(filter.getName());
 

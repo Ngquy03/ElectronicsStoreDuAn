@@ -103,7 +103,7 @@ public class ProductFragment extends Fragment {
         listFilter.add(new Filter(Filter.TYPE_FILTER_ALL, getString(R.string.filter_all)));
         listFilter.add(new Filter(Filter.TYPE_FILTER_RATE, getString(R.string.filter_rate)));
         listFilter.add(new Filter(Filter.TYPE_FILTER_PRICE, getString(R.string.filter_price)));
-        listFilter.add(new Filter(Filter.TYPE_FILTER_PROMOTION, getString(R.string.filter_promotion)));
+
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.HORIZONTAL, false);
@@ -209,11 +209,7 @@ public class ProductFragment extends Fragment {
                             (product1, product2) -> Integer.compare(product1.getRealPrice(), product2.getRealPrice()));
                     break;
 
-                case Filter.TYPE_FILTER_PROMOTION:
-                    for (Product product : listProductKeyWord) {
-                        if (product.getSale() > 0) listProductDisplay.add(product);
-                    }
-                    break;
+
             }
         } else {
             switch (filter.getId()) {
@@ -233,11 +229,7 @@ public class ProductFragment extends Fragment {
                             (product1, product2) -> Integer.compare(product1.getRealPrice(), product2.getRealPrice()));
                     break;
 
-                case Filter.TYPE_FILTER_PROMOTION:
-                    for (Product product : listProduct) {
-                        if (product.getSale() > 0) listProductDisplay.add(product);
-                    }
-                    break;
+
             }
         }
         reloadListProduct();

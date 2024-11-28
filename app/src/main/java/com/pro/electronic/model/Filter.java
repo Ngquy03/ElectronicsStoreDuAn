@@ -5,7 +5,7 @@ public class Filter {
     public static final int TYPE_FILTER_ALL = 1;
     public static final int TYPE_FILTER_RATE = 2;
     public static final int TYPE_FILTER_PRICE = 3;
-    public static final int TYPE_FILTER_PROMOTION = 4;
+
 
     private int id;
     private String name;
