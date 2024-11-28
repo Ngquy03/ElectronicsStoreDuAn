@@ -34,7 +34,7 @@ import java.util.Map;
 public class AdminAddProductActivity extends BaseActivity {
 
     private TextView tvToolbarTitle;
-    private EditText edtName, edtDescription, edtPrice, edtPromotion, edtImage, edtImageBanner, edtInfo;
+    private EditText edtName, edtDescription, edtPrice, edtImage, edtImageBanner, edtInfo;
     private CheckBox chbFeatured;
     private Spinner spnCategory;
     private Button btnAddOrEdit;
@@ -87,7 +87,6 @@ public class AdminAddProductActivity extends BaseActivity {
             edtDescription.setText(mProduct.getDescription());
             edtInfo.setText(mProduct.getInfo());
             edtPrice.setText(String.valueOf(mProduct.getPrice()));
-            edtPromotion.setText(String.valueOf(mProduct.getSale()));
             edtImage.setText(mProduct.getImage());
             edtImageBanner.setText(mProduct.getBanner());
             chbFeatured.setChecked(mProduct.isFeatured());
@@ -151,7 +150,7 @@ public class AdminAddProductActivity extends BaseActivity {
         String strDescription = edtDescription.getText().toString().trim();
         String strInfo = edtInfo.getText().toString().trim();
         String strPrice = edtPrice.getText().toString().trim();
-        String strPromotion = edtPromotion.getText().toString().trim();
+
         String strImage = edtImage.getText().toString().trim();
         String strImageBanner = edtImageBanner.getText().toString().trim();
 
@@ -185,9 +184,7 @@ public class AdminAddProductActivity extends BaseActivity {
             return;
         }
 
-        if (StringUtil.isEmpty(strPromotion)) {
-            strPromotion = "0";
-        }
+
 
         // Update product
         if (isUpdate) {
@@ -197,7 +194,6 @@ public class AdminAddProductActivity extends BaseActivity {
             map.put("description", strDescription);
             map.put("info", strInfo);
             map.put("price", Integer.parseInt(strPrice));
-            map.put("sale", Integer.parseInt(strPromotion));
             map.put("image", strImage);
             map.put("banner", strImageBanner);
             map.put("featured", chbFeatured.isChecked());
@@ -223,7 +219,7 @@ public class AdminAddProductActivity extends BaseActivity {
         product.setDescription(strDescription);
         product.setInfo(strInfo);
         product.setPrice(Integer.parseInt(strPrice));
-        product.setSale(Integer.parseInt(strPromotion));
+
         product.setImage(strImage);
         product.setBanner(strImageBanner);
         product.setFeatured(chbFeatured.isChecked());
@@ -238,7 +234,6 @@ public class AdminAddProductActivity extends BaseActivity {
                     edtDescription.setText("");
                     edtInfo.setText("");
                     edtPrice.setText("");
-                    edtPromotion.setText("0");
                     edtImage.setText("");
                     edtImageBanner.setText("");
                     chbFeatured.setChecked(false);

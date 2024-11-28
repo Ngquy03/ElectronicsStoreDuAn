@@ -16,13 +16,11 @@ import com.pro.electronic.event.AddressSelectedEvent;
 import com.pro.electronic.event.DisplayCartEvent;
 import com.pro.electronic.event.OrderSuccessEvent;
 import com.pro.electronic.event.PaymentMethodSelectedEvent;
-import com.pro.electronic.event.VoucherSelectedEvent;
 import com.pro.electronic.model.Address;
 import com.pro.electronic.model.Order;
 import com.pro.electronic.model.PaymentMethod;
 import com.pro.electronic.model.Product;
 import com.pro.electronic.model.ProductOrder;
-import com.pro.electronic.model.Voucher;
 import com.pro.electronic.prefs.DataStoreManager;
 import com.pro.electronic.utils.Constant;
 import com.pro.electronic.utils.GlobalFunction;
@@ -54,7 +52,7 @@ public class CartActivity extends BaseActivity {
     private int mAmount;
     private PaymentMethod paymentMethodSelected;
     private Address addressSelected;
-    private Voucher voucherSelected;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,9 +133,7 @@ public class CartActivity extends BaseActivity {
             }
             orderBooking.setProducts(products);
             orderBooking.setPrice(priceProduct);
-            if (voucherSelected != null) {
-                orderBooking.setVoucher(voucherSelected.getPriceDiscount(priceProduct));
-            }
+
             orderBooking.setTotal(mAmount);
             orderBooking.setPaymentMethod(paymentMethodSelected.getName());
             orderBooking.setAddress(addressSelected);
@@ -215,12 +211,7 @@ public class CartActivity extends BaseActivity {
         tvPriceProduct.setText(strPriceProduct);
 
         mAmount = totalPrice;
-        if (voucherSelected != null) {
-            String strPriceVoucher = "-" + voucherSelected.getPriceDiscount(priceProduct)
-                    + Constant.CURRENCY;
 
-            mAmount = mAmount - voucherSelected.getPriceDiscount(priceProduct);
-        }
         String strAmount = mAmount + Constant.CURRENCY;
         tvAmount.setText(strAmount);
     }
