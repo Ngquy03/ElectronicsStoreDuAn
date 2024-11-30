@@ -28,7 +28,7 @@ public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapte
         this.listProduct = list;
         this.mListener = listener;
     }
-
+    public static final String CURRENCY = "vnd";
     @NonNull
     @Override
     public AdminProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,11 +44,12 @@ public class AdminProductAdapter extends RecyclerView.Adapter<AdminProductAdapte
 
         GlideUtils.loadUrl(product.getImage(), holder.imgProduct);
         holder.tvName.setText(product.getName());
-
+        String formattedPrice = String.format("%,d", product.getPrice()).replace(",", ".");
+        formattedPrice = formattedPrice + Constant.CURRENCY;
         if (product.getSale() <= 0) {
-            holder.tvPrice.setVisibility(View.GONE);
-            String strPrice = product.getPrice() + Constant.CURRENCY;
-            holder.tvPriceSale.setText(strPrice);
+            holder.tvPrice.setVisibility(View.GONE); // Ẩn giá gốc
+            holder.tvPriceSale.setVisibility(View.VISIBLE);
+            holder.tvPriceSale.setText(formattedPrice);
         } else {
             holder.tvPrice.setVisibility(View.VISIBLE);
 
