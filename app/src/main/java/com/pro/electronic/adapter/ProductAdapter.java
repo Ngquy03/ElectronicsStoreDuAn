@@ -28,7 +28,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         this.listProduct = list;
         this.iClickProductListener = listener;
     }
-
+    public static final String CURRENCY = "vnd";
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -47,18 +47,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.tvDescription.setText(product.getDescription());
         holder.tvRate.setText(String.valueOf(product.getRate()));
 
+        String formattedPrice = String.format("%,d", product.getPrice()).replace(",",".");
+        String formattedRealPrice = String.format("%,d", product.getRealPrice()).replace(",",".");
         if (product.getSale() <= 0) {
             holder.tvPrice.setVisibility(View.GONE);
-            String strPrice = product.getPrice() + Constant.CURRENCY;
+            String strPrice = formattedPrice + "" + Constant.CURRENCY;
             holder.tvPriceSale.setText(strPrice);
         } else {
             holder.tvPrice.setVisibility(View.VISIBLE);
 
-            String strOldPrice = product.getPrice() + Constant.CURRENCY;
+            String strOldPrice = formattedPrice + "" + Constant.CURRENCY;
             holder.tvPrice.setText(strOldPrice);
             holder.tvPrice.setPaintFlags(holder.tvPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-            String strRealPrice = product.getRealPrice() + Constant.CURRENCY;
+            String strRealPrice = formattedRealPrice + "" + Constant.CURRENCY;
             holder.tvPriceSale.setText(strRealPrice);
         }
 

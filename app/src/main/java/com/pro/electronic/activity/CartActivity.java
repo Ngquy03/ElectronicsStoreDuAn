@@ -29,6 +29,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -192,7 +193,7 @@ public class CartActivity extends BaseActivity {
 
     private void calculateTotalPrice() {
         if (listProductCart == null || listProductCart.isEmpty()) {
-            String strZero = 0 + Constant.CURRENCY;
+            String strZero = formatPrice(0);
             priceProduct = 0;
             tvPriceProduct.setText(strZero);
 
@@ -207,13 +208,18 @@ public class CartActivity extends BaseActivity {
         }
 
         priceProduct = totalPrice;
-        String strPriceProduct = priceProduct + Constant.CURRENCY;
+        String strPriceProduct = formatPrice(priceProduct);
         tvPriceProduct.setText(strPriceProduct);
 
         mAmount = totalPrice;
-
-        String strAmount = mAmount + Constant.CURRENCY;
+        String strAmount = formatPrice(mAmount);
         tvAmount.setText(strAmount);
+    }
+
+    // Hàm định dạng giá theo kiểu 1.000.000
+    private String formatPrice(int price) {
+        DecimalFormat decimalFormat = new DecimalFormat("#.###");
+        return decimalFormat.format(price) + Constant.CURRENCY;
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

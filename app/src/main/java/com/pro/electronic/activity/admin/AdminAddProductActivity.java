@@ -26,9 +26,11 @@ import com.pro.electronic.utils.Constant;
 import com.pro.electronic.utils.GlobalFunction;
 import com.pro.electronic.utils.StringUtil;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class AdminAddProductActivity extends BaseActivity {
@@ -53,6 +55,10 @@ public class AdminAddProductActivity extends BaseActivity {
         initUi();
         initData();
     }
+    private String formatCurrency(int price) {
+        return String.format("%,d", price).replace(",", ".");
+    }
+
 
     private void loadDataIntent() {
         Bundle bundleReceived = getIntent().getExtras();
@@ -86,7 +92,7 @@ public class AdminAddProductActivity extends BaseActivity {
             edtName.setText(mProduct.getName());
             edtDescription.setText(mProduct.getDescription());
             edtInfo.setText(mProduct.getInfo());
-            edtPrice.setText(String.valueOf(mProduct.getPrice()));
+            edtPrice.setText(formatCurrency(mProduct.getPrice()));
             edtImage.setText(mProduct.getImage());
             edtImageBanner.setText(mProduct.getBanner());
             chbFeatured.setChecked(mProduct.isFeatured());
@@ -144,6 +150,15 @@ public class AdminAddProductActivity extends BaseActivity {
         }
         return position;
     }
+    private int parseCurrency(String currency) {
+        try {
+            // Loại bỏ dấu phân cách và đơn vị tiền tệ trước khi chuyển đổi
+            return Integer.parseInt(currency.replace(".", "").replace(" VND", ""));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return 0; // Trả về 0 nếu chuỗi không hợp lệ
+        }
+    }
 
     private void addOrEditProduct() {
         String strName = edtName.getText().toString().trim();
@@ -164,8 +179,15 @@ public class AdminAddProductActivity extends BaseActivity {
             return;
         }
 
-        if (StringUtil.isEmpty(strPrice)) {
-            Toast.makeText(this, getString(R.string.msg_price_require), Toast.LENGTH_SHORT).show();
+        try {
+            // Loại bỏ dấu phân cách trước khi chuyển đổi
+            int price = parseCurrency(strPrice);
+            if (price <= 0) {
+                Toast.makeText(this, getString(R.string.msg_price_require), Toast.LENGTH_SHORT).show();
+                return;
+            }
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, getString(R.string.msg_invalid_price), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -193,7 +215,7 @@ public class AdminAddProductActivity extends BaseActivity {
             map.put("name", strName);
             map.put("description", strDescription);
             map.put("info", strInfo);
-            map.put("price", Integer.parseInt(strPrice));
+            map.put("price", parseCurrency(strPrice));
             map.put("image", strImage);
             map.put("banner", strImageBanner);
             map.put("featured", chbFeatured.isChecked());
@@ -218,7 +240,7 @@ public class AdminAddProductActivity extends BaseActivity {
         product.setName(strName);
         product.setDescription(strDescription);
         product.setInfo(strInfo);
-        product.setPrice(Integer.parseInt(strPrice));
+        product.setPrice(parseCurrency(strPrice));
 
         product.setImage(strImage);
         product.setBanner(strImageBanner);
@@ -243,6 +265,7 @@ public class AdminAddProductActivity extends BaseActivity {
                 });
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -251,4 +274,5 @@ public class AdminAddProductActivity extends BaseActivity {
                     .removeEventListener(mValueEventListener);
         }
     }
+
 }
