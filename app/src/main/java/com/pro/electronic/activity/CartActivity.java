@@ -30,6 +30,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +55,7 @@ public class CartActivity extends BaseActivity {
     private PaymentMethod paymentMethodSelected;
     private Address addressSelected;
 
+    public static final String CURRENCY = " VND";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,16 @@ public class CartActivity extends BaseActivity {
         initListener();
         initData();
     }
+    // Hàm định dạng giá theo kiểu 1.000.00
+    private String formatPrice(int price) {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.'); // Dấu chấm phân cách nhóm nghìn
+        symbols.setDecimalSeparator('.'); // Dấu chấm cho phân cách thập phân
+
+        DecimalFormat decimalFormat = new DecimalFormat("###,###.###", symbols);
+        return decimalFormat.format(price) + Constant.CURRENCY;
+    }
+
 
     private void initToolbar() {
         ImageView imgToolbarBack = findViewById(R.id.img_toolbar_back);
@@ -214,12 +226,6 @@ public class CartActivity extends BaseActivity {
         mAmount = totalPrice;
         String strAmount = formatPrice(mAmount);
         tvAmount.setText(strAmount);
-    }
-
-    // Hàm định dạng giá theo kiểu 1.000.000
-    private String formatPrice(int price) {
-        DecimalFormat decimalFormat = new DecimalFormat("#.###");
-        return decimalFormat.format(price) + Constant.CURRENCY;
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

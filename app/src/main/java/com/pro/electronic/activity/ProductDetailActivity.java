@@ -24,6 +24,8 @@ import com.pro.electronic.utils.StringUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
 
 public class ProductDetailActivity extends BaseActivity {
@@ -47,6 +49,12 @@ public class ProductDetailActivity extends BaseActivity {
     private Product mProduct;
 
     private ValueEventListener mProductValueEventListener;
+    private String formatCurrency(int amount) {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.'); // Đặt dấu phân cách là dấu chấm
+        DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols);
+        return decimalFormat.format(amount);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +126,7 @@ public class ProductDetailActivity extends BaseActivity {
         if (mProduct == null) return;
         GlideUtils.loadUrlBanner(mProduct.getBanner(), imgProduct);
         tvName.setText(mProduct.getName());
-        String strPrice = mProduct.getRealPrice() + Constant.CURRENCY;
+        String strPrice = formatCurrency(mProduct.getRealPrice()) + Constant.CURRENCY;
         tvPriceSale.setText(strPrice);
         tvDescription.setText(mProduct.getDescription());
         if (mProductOld != null) {
@@ -183,13 +191,16 @@ public class ProductDetailActivity extends BaseActivity {
         int count = Integer.parseInt(tvCount.getText().toString().trim());
         int priceOneProduct = mProduct.getRealPrice();
         int totalPrice = priceOneProduct * count;
-        String strTotalPrice = totalPrice + Constant.CURRENCY;
+
+        // Định dạng số tiền với dấu ngăn cách hàng nghìn
+        String strTotalPrice = formatCurrency(totalPrice) + Constant.CURRENCY;
         tvTotal.setText(strTotalPrice);
 
         mProduct.setCount(count);
         mProduct.setPriceOneProduct(priceOneProduct);
         mProduct.setTotalPrice(totalPrice);
     }
+
 
     private boolean isProductInCart() {
         List<Product> list = ProductDatabase.getInstance(this)

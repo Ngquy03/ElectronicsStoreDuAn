@@ -14,6 +14,8 @@ import com.pro.electronic.model.Product;
 import com.pro.electronic.utils.Constant;
 import com.pro.electronic.utils.GlideUtils;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
@@ -39,6 +41,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 .inflate(R.layout.item_cart, parent, false);
         return new CartViewHolder(view);
     }
+    private String formatPrice(int price) {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.'); // Dấu chấm phân cách hàng nghìn
+        DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols); // Định dạng không có phần thập phân
+        return decimalFormat.format(price);
+    }
+
+
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
@@ -47,9 +57,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         GlideUtils.loadUrl(product.getImage(), holder.imgProduct);
         holder.tvName.setText(product.getName());
-        String strPrice = product.getPriceOneProduct() + Constant.CURRENCY;
+
+        String strPrice = formatPrice(product.getPriceOneProduct()) + Constant.CURRENCY;
         holder.tvPrice.setText(strPrice);
         holder.tvDescription.setText(product.getDescription());
+
         String strQuantity = "x" + product.getCount();
         holder.tvQuantity.setText(strQuantity);
         holder.tvCount.setText(String.valueOf(product.getCount()));
@@ -85,6 +97,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.imgDelete.setOnClickListener(v
                 -> iClickCartListener.onClickDeleteItem(product, holder.getAdapterPosition()));
     }
+
 
     @Override
     public int getItemCount() {
