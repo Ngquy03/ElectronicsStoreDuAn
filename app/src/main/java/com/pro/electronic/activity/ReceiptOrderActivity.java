@@ -20,6 +20,9 @@ import com.pro.electronic.utils.Constant;
 import com.pro.electronic.utils.DateTimeUtils;
 import com.pro.electronic.utils.GlobalFunction;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
 public class ReceiptOrderActivity extends BaseActivity {
 
     private TextView tvIdTransaction, tvDateTime;
@@ -105,27 +108,41 @@ public class ReceiptOrderActivity extends BaseActivity {
         MyApplication.get(this).getOrderDetailDatabaseReference(orderId)
                 .addValueEventListener(mValueEventListener);
     }
+    private String formatCurrency(long amount) {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.'); // Đặt dấu phân cách là dấu chấm
+        DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols);
+        return decimalFormat.format(amount);
+    }
 
     private void initData() {
         tvIdTransaction.setText(String.valueOf(mOrder.getId()));
         tvDateTime.setText(DateTimeUtils.convertTimeStampToDate(Long.parseLong(mOrder.getDateTime())));
-        String strPrice = mOrder.getPrice() + Constant.CURRENCY;
+
+        // Định dạng giá và tổng
+        String strPrice = formatCurrency(mOrder.getPrice()) + Constant.CURRENCY;
         tvPrice.setText(strPrice);
 
-        String strTotal = mOrder.getTotal() + Constant.CURRENCY;
+        String strTotal = formatCurrency(mOrder.getTotal()) + Constant.CURRENCY;
         tvTotal.setText(strTotal);
+
         tvPaymentMethod.setText(mOrder.getPaymentMethod());
         tvName.setText(mOrder.getAddress().getName());
         tvPhone.setText(mOrder.getAddress().getPhone());
         tvAddress.setText(mOrder.getAddress().getAddress());
+
+        // Cập nhật danh sách sản phẩm
         ProductOrderAdapter adapter = new ProductOrderAdapter(mOrder.getProducts());
         rcvProducts.setAdapter(adapter);
+
+        // Ẩn/Hiện nút theo trạng thái đơn hàng
         if (Order.STATUS_COMPLETE == mOrder.getStatus()) {
             tvTrackingOrder.setVisibility(View.GONE);
         } else {
             tvTrackingOrder.setVisibility(View.VISIBLE);
         }
     }
+
 
     @Override
     protected void onDestroy() {
