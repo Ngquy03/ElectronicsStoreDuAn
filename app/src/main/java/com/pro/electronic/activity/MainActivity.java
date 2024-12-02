@@ -10,11 +10,13 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.pro.electronic.R;
 import com.pro.electronic.adapter.MyViewPagerAdapter;
 import com.pro.electronic.database.ProductDatabase;
 import com.pro.electronic.event.DisplayCartEvent;
 import com.pro.electronic.model.Product;
+import com.pro.electronic.prefs.DataStoreManager;
 import com.pro.electronic.utils.Constant;
 import com.pro.electronic.utils.GlobalFunction;
 import com.pro.electronic.utils.StringUtil;
@@ -36,7 +38,8 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        DataStoreManager.clearUser();
+        FirebaseAuth.getInstance().signOut();
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }

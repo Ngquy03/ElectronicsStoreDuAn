@@ -7,9 +7,11 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.pro.electronic.R;
 import com.pro.electronic.activity.BaseActivity;
 import com.pro.electronic.adapter.admin.AdminViewPagerAdapter;
+import com.pro.electronic.prefs.DataStoreManager;
 
 public class AdminMainActivity extends BaseActivity {
 
@@ -19,6 +21,8 @@ public class AdminMainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DataStoreManager.clearUser();
+        FirebaseAuth.getInstance().signOut();
         setContentView(R.layout.activity_admin_main);
 
         initUi();

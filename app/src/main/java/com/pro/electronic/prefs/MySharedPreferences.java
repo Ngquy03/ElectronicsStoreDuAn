@@ -1,6 +1,7 @@
 package com.pro.electronic.prefs;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 public class MySharedPreferences {
 
@@ -12,78 +13,86 @@ public class MySharedPreferences {
     }
 
     public void putLongValue(String key, long n) {
-        android.content.SharedPreferences pref = mContext.getSharedPreferences(
-                ELECTRONICS_STORE_PRO_PREFERENCES, 0);
-        android.content.SharedPreferences.Editor editor = pref.edit();
+        SharedPreferences pref = mContext.getSharedPreferences(
+                ELECTRONICS_STORE_PRO_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
         editor.putLong(key, n);
         editor.apply();
     }
 
     public long getLongValue(String key) {
-        android.content.SharedPreferences pref = mContext.getSharedPreferences(
-                ELECTRONICS_STORE_PRO_PREFERENCES, 0);
+        SharedPreferences pref = mContext.getSharedPreferences(
+                ELECTRONICS_STORE_PRO_PREFERENCES, Context.MODE_PRIVATE);
         return pref.getLong(key, 0);
     }
 
     public void putIntValue(String key, int n) {
-        android.content.SharedPreferences pref = mContext.getSharedPreferences(
-                ELECTRONICS_STORE_PRO_PREFERENCES, 0);
-        android.content.SharedPreferences.Editor editor = pref.edit();
+        SharedPreferences pref = mContext.getSharedPreferences(
+                ELECTRONICS_STORE_PRO_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
         editor.putInt(key, n);
         editor.apply();
     }
 
     public int getIntValue(String key) {
-        android.content.SharedPreferences pref = mContext.getSharedPreferences(
-                ELECTRONICS_STORE_PRO_PREFERENCES, 0);
+        SharedPreferences pref = mContext.getSharedPreferences(
+                ELECTRONICS_STORE_PRO_PREFERENCES, Context.MODE_PRIVATE);
         return pref.getInt(key, 0);
     }
 
     public void putStringValue(String key, String s) {
-        android.content.SharedPreferences pref = mContext.getSharedPreferences(
-                ELECTRONICS_STORE_PRO_PREFERENCES, 0);
-        android.content.SharedPreferences.Editor editor = pref.edit();
+        SharedPreferences pref = mContext.getSharedPreferences(
+                ELECTRONICS_STORE_PRO_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
         editor.putString(key, s);
         editor.apply();
     }
 
     public String getStringValue(String key) {
-        android.content.SharedPreferences pref = mContext.getSharedPreferences(
-                ELECTRONICS_STORE_PRO_PREFERENCES, 0);
+        SharedPreferences pref = mContext.getSharedPreferences(
+                ELECTRONICS_STORE_PRO_PREFERENCES, Context.MODE_PRIVATE);
         return pref.getString(key, "");
     }
 
     public String getStringValue(String key, String defaultValue) {
-        android.content.SharedPreferences pref = mContext.getSharedPreferences(
-                ELECTRONICS_STORE_PRO_PREFERENCES, 0);
+        SharedPreferences pref = mContext.getSharedPreferences(
+                ELECTRONICS_STORE_PRO_PREFERENCES, Context.MODE_PRIVATE);
         return pref.getString(key, defaultValue);
     }
 
     public void putBooleanValue(String key, Boolean b) {
-        android.content.SharedPreferences pref = mContext.getSharedPreferences(
-                ELECTRONICS_STORE_PRO_PREFERENCES, 0);
-        android.content.SharedPreferences.Editor editor = pref.edit();
+        SharedPreferences pref = mContext.getSharedPreferences(
+                ELECTRONICS_STORE_PRO_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
         editor.putBoolean(key, b);
         editor.apply();
     }
 
     public boolean getBooleanValue(String key) {
-        android.content.SharedPreferences pref = mContext.getSharedPreferences(
-                ELECTRONICS_STORE_PRO_PREFERENCES, 0);
+        SharedPreferences pref = mContext.getSharedPreferences(
+                ELECTRONICS_STORE_PRO_PREFERENCES, Context.MODE_PRIVATE);
         return pref.getBoolean(key, false);
     }
 
     public void putFloatValue(String key, float f) {
-        android.content.SharedPreferences pref = mContext.getSharedPreferences(
-                ELECTRONICS_STORE_PRO_PREFERENCES, 0);
-        android.content.SharedPreferences.Editor editor = pref.edit();
+        SharedPreferences pref = mContext.getSharedPreferences(
+                ELECTRONICS_STORE_PRO_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
         editor.putFloat(key, f);
         editor.apply();
     }
 
     public float getFloatValue(String key) {
-        android.content.SharedPreferences pref = mContext.getSharedPreferences(
-                ELECTRONICS_STORE_PRO_PREFERENCES, 0);
+        SharedPreferences pref = mContext.getSharedPreferences(
+                ELECTRONICS_STORE_PRO_PREFERENCES, Context.MODE_PRIVATE);
         return pref.getFloat(key, 0.0f);
+    }
+
+    public void removeKey(String key) {
+        SharedPreferences pref = mContext.getSharedPreferences(
+                ELECTRONICS_STORE_PRO_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.remove(key);
+        editor.apply();
     }
 }
