@@ -88,11 +88,4 @@ public class MySharedPreferences {
         return pref.getFloat(key, 0.0f);
     }
 
-    public void removeKey(String key) {
-        SharedPreferences pref = mContext.getSharedPreferences(
-                ELECTRONICS_STORE_PRO_PREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.remove(key);
-        editor.apply();
-    }
 }

@@ -47,8 +47,5 @@ public class DataStoreManager {
     }
 
     // Thêm phương thức xóa thông tin người dùng
-    public static void clearUser() {
-        DataStoreManager.getInstance().sharedPreferences
-                .removeKey(PREF_USER_INFO);
-    }
+
 }

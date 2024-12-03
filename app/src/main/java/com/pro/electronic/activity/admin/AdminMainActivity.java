@@ -21,8 +21,7 @@ public class AdminMainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DataStoreManager.clearUser();
-        FirebaseAuth.getInstance().signOut();
+
         setContentView(R.layout.activity_admin_main);
 
         initUi();
